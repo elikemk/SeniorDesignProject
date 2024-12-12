@@ -3,6 +3,9 @@ Elikem Kalitsi
 Senior Design Project
 December 9th 2024
 Context
+# LINK TO PRESENTATION: https://www.youtube.com/watch?v=tOB5P4QQkPY&t=10s
+
+PROPOSAL:
 How can identity spark identity when reality favors dependent thinking? In a society that grows
 around computational consumption and contiguous social media, algorithms are interesting to
 point out in the context of identifiable technology. My question is: What are the outcomes of
@@ -40,4 +43,3 @@ https://justadudewhohacks.github.io/face-api.js/docs/index.html
 face api js has a optimized tiny face detector and a multi task cascaded convolutional neural
 network The face recognition used a resNet34r architecture and was trained to learn the
 features of a human face.
-https://www.youtube.com/watch?v=tOB5P4QQkPY&t=10s
