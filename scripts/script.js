@@ -75,7 +75,6 @@ const run = async()=>{
         faceapi.draw.drawDetections(canvas,faceAIData)
         faceapi.draw.drawFaceLandmarks(canvas,faceAIData)
         faceapi.draw.drawFaceExpressions(canvas,faceAIData)
-        faceapi.draw.drawFaceExpressions(canvas, faceAIData)
 
 
         faceAIData.forEach(face=> {
