@@ -44,13 +44,18 @@ const run = async()=>{
     const refFace3 = await faceapi.fetchImage('./whitley-righteous-walton-c2025.jpg').catch((err) => {
         console.log('Error was loading ref face 3', err);
     });
+    const refFace4 = await faceapi.fetchImage('./whitley-righteous-walton-c2025.jpg').catch((err) => {
+        console.log('JUST A TESTCASE', err);
+    }); 
     if (!refFace1 || !refFace2 || !refFace3) return;
 // using dectSinggleFace
     let reFaceAiData1 = await faceapi.detectSingleFace(refFace1).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
     let reFaceAiData2 = await faceapi.detectSingleFace(refFace2).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
     let reFaceAiData3 = await faceapi.detectSingleFace(refFace3).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
+    let reFaceAiData4 = await faceapi.detectSingleFace(refFace4).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
 
-    const labeledDescriptors = [new faceapi.LabeledFaceDescriptors("Elikem",[reFaceAiData1.descriptor]), new faceapi.LabeledFaceDescriptors("Moretti", [reFaceAiData2.descriptor]),  new faceapi.LabeledFaceDescriptors("Righteous", [reFaceAiData3.descriptor])]
+
+    const labeledDescriptors = [new faceapi.LabeledFaceDescriptors("Elikem",[reFaceAiData1.descriptor]), new faceapi.LabeledFaceDescriptors("Moretti", [reFaceAiData2.descriptor]),  new faceapi.LabeledFaceDescriptors("Righteous", [reFaceAiData3.descriptor]), new faceapi.labeledDescriptors("Righteous Dismorphic", [reFaceAiData4.descriptor])]
 
     const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors)
 
@@ -63,17 +68,21 @@ const run = async()=>{
         .withAgeAndGender()
         .withFaceExpressions();        // draw canvas
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
+        // TO DO: Fix the runtime for the FaceAIData
+        // TO DO: insure chrome compatability 
 
         faceAIData = await faceapi.resizeResults(faceAIData, video)
         faceapi.draw.drawDetections(canvas,faceAIData)
         faceapi.draw.drawFaceLandmarks(canvas,faceAIData)
         faceapi.draw.drawFaceExpressions(canvas,faceAIData)
+        faceapi.draw.drawFaceExpressions(canvas, faceAIData)
 
 
         faceAIData.forEach(face=> {
             const { age, gender, genderProbability, detection, descriptor } = face
             const genderText = `${gender} - ${Math.round(genderProbability*100)/100*100}`
-            const ageText = `${Math.round(age)} years`
+            const ageText = `${Math.round(age)} years` 
+            // Nip: why agetext on line 84? Fix this to ensure agetext - gendertext 
             const textField = new faceapi.draw.DrawTextField([genderText, ageText], face.detection.box.topRight)
             
             const bestMatch = faceMatcher.findBestMatch(descriptor);
