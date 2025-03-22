@@ -44,10 +44,10 @@ const run = async()=>{
     const refFace3 = await faceapi.fetchImage('./whitley-righteous-walton-c2025.jpg').catch((err) => {
         console.log('Error was loading ref face 3', err);
     });
-    if (!refFace1 || !refFace2) return;
+    if (!refFace1 || !refFace2 || !refFace3) return;
 // using dectSinggleFace
     let reFaceAiData1 = await faceapi.detectSingleFace(refFace1).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
-    let reFaceAiData2 = await faceapi.detectSingleFace(refFace2).withFaceLandmarks().withFaceDescriptor()
+    let reFaceAiData2 = await faceapi.detectSingleFace(refFace2).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
     let reFaceAiData3 = await faceapi.detectSingleFace(refFace3).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
 
     const labeledDescriptors = [new faceapi.LabeledFaceDescriptors("Elikem",[reFaceAiData1.descriptor]), new faceapi.LabeledFaceDescriptors("Moretti", [reFaceAiData2.descriptor]),  new faceapi.LabeledFaceDescriptors("Righteous", [reFaceAiData3.descriptor])]
