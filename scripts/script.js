@@ -55,7 +55,7 @@ const run = async()=>{
     let reFaceAiData4 = await faceapi.detectSingleFace(refFace4).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
 
 
-    const labeledDescriptors = [new faceapi.LabeledFaceDescriptors("Elikem",[reFaceAiData1.descriptor]), new faceapi.LabeledFaceDescriptors("Moretti", [reFaceAiData2.descriptor]),  new faceapi.LabeledFaceDescriptors("Righteous", [reFaceAiData3.descriptor]), new faceapi.labeledDescriptors("Righteous Dismorphic", [reFaceAiData4.descriptor])]
+    const labeledDescriptors = [new faceapi.LabeledFaceDescriptors("Elikem",[reFaceAiData1.descriptor]), new faceapi.LabeledFaceDescriptors("Moretti", [reFaceAiData2.descriptor]),  new faceapi.LabeledFaceDescriptors("Righteous", [reFaceAiData3.descriptor]), new faceapi.LabeledFaceDescriptors("Righteous Dismorphic", [reFaceAiData4.descriptor])]
 
     const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors)
 
@@ -68,8 +68,7 @@ const run = async()=>{
         .withAgeAndGender()
         .withFaceExpressions();        // draw canvas
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
-        // TO DO: Fix the runtime for the FaceAIData
-        // TO DO: insure chrome compatability 
+    
 
         faceAIData = await faceapi.resizeResults(faceAIData, video)
         faceapi.draw.drawDetections(canvas,faceAIData)
@@ -81,7 +80,6 @@ const run = async()=>{
             const { age, gender, genderProbability, detection, descriptor } = face
             const genderText = `${gender} - ${Math.round(genderProbability*100)/100*100}`
             const ageText = `${Math.round(age)} years` 
-            // Nip: why agetext on line 84? Fix this to ensure agetext - gendertext 
             const textField = new faceapi.draw.DrawTextField([genderText, ageText], face.detection.box.topRight)
             
             const bestMatch = faceMatcher.findBestMatch(descriptor);
