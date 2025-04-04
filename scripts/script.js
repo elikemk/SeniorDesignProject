@@ -28,11 +28,20 @@ const run = async()=>{
 
 
     //setting up the canvas of our video feed 
-    const canvas = document.getElementById('canvas')
+    const canvas = docuayent.getElementById('canvas')
     canvas.style.left = video.offsetLeft
     canvas.style.top = video.offsetTop
-    canvas.height = video.height
-    canvas.width = video.width
+    video.onloadedmetadata = () => {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.style.left = `${video.offsetLeft}px`;
+        canvas.style.top = `${video.offsetTop}px`;
+    
+        faceapi.matchDimensions(canvas, {
+            width: video.videoWidth,
+            height: video.videoHeight
+        });
+    };
 
     //creating two reference faces
     const refFace1 = await faceapi.fetchImage('./elikem.jpg').catch((err) => {
@@ -70,7 +79,7 @@ const run = async()=>{
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
     
 
-        faceAIData = await faceapi.resizeResults(faceAIData, video)
+        // faceAIData = await faceapi.resizeResults(faceAIData, video)
         faceapi.draw.drawDetections(canvas,faceAIData)
         faceapi.draw.drawFaceLandmarks(canvas,faceAIData)
         faceapi.draw.drawFaceExpressions(canvas,faceAIData)
