@@ -44,7 +44,7 @@ console.log(faceapi)
      const refFace3 = await faceapi.fetchImage('./w.jpg').catch((err) => {
         console.error('Error loading reference face 2:', err);
     });
-     if (!refFace1 || !refFace2 || !reFaceAiData3) return;
+     if (!refFace1 || !refFace2 || !refFace3) return;
  // using dectSinggleFace
      let reFaceAiData1 = await faceapi.detectSingleFace(refFace1).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
      let reFaceAiData2 = await faceapi.detectSingleFace(refFace2).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
@@ -82,6 +82,8 @@ console.log(faceapi)
              };
              const drawBox = new faceapi.draw.DrawBox(detection.box, options);
              drawBox.draw(canvas);
+
+             textField.draw(canvas);
  
          })
  
