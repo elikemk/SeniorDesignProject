@@ -41,12 +41,16 @@ console.log(faceapi)
      const refFace2 = await faceapi.fetchImage('./moretti.jpg').catch((err) => {
          console.error('Error loading reference face 2:', err);
      });
-     if (!refFace1 || !refFace2) return;
+     const refFace3 = await faceapi.fetchImage('./w.jpg').catch((err) => {
+        console.error('Error loading reference face 2:', err);
+    });
+     if (!refFace1 || !refFace2 || !reFaceAiData3) return;
  // using dectSinggleFace
      let reFaceAiData1 = await faceapi.detectSingleFace(refFace1).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
-     let reFaceAiData2 = await faceapi.detectSingleFace(refFace2).withFaceLandmarks().withFaceDescriptor()
- 
-     const labeledDescriptors = [new faceapi.LabeledFaceDescriptors("Elikem",[reFaceAiData1.descriptor]), new faceapi.LabeledFaceDescriptors("Moretti", [reFaceAiData2.descriptor])]
+     let reFaceAiData2 = await faceapi.detectSingleFace(refFace2).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
+     let reFaceAiData3 = await faceapi.detectSingleFace(refFace3).withFaceLandmarks().withFaceDescriptor().withAgeAndGender()
+
+     const labeledDescriptors = [new faceapi.LabeledFaceDescriptors("Elikem",[reFaceAiData1.descriptor]), new faceapi.LabeledFaceDescriptors("Moretti", [reFaceAiData2.descriptor]), new faceapi.LabeledFaceDescriptors("Righteous",[reFaceAiData1.descriptor]),]
  
      const faceMatcher = new faceapi.FaceMatcher(labeledDescriptors)
  
