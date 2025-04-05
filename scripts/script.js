@@ -28,7 +28,7 @@ const run = async()=>{
 
 
     //setting up the canvas of our video feed 
-    const canvas = docuayent.getElementById('canvas')
+    const canvas = document.getElementById('canvas')
     canvas.style.left = video.offsetLeft
     canvas.style.top = video.offsetTop
     video.onloadedmetadata = () => {
@@ -105,6 +105,8 @@ const run = async()=>{
     
 
 }
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('resources-page');
     if (button) {
